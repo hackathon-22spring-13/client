@@ -10,16 +10,8 @@ import { changeColor, colors } from '../tools/color';
 import { changeLine } from '../tools/line';
 import { changeObject, objects } from '../tools/object';
 import { changeWeight, weights } from '../tools/weight';
+import { Tool, Tools } from '../types';
 import MenuModal from './MenuModal';
-
-interface Tool {
-  name: string;
-  id: Tools;
-  icon: React.ReactElement;
-  items: string[];
-  function: () => void;
-}
-type Tools = 'color' | 'weight' | 'object' | 'line' | 'clear' | '';
 
 const ToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);

@@ -1,4 +1,4 @@
-type Tools = 'color' | 'weight' | 'object' | 'line' | 'clear' | '';
+import { Tools } from '../types';
 
 interface Props {
   selectedTool: Tools;

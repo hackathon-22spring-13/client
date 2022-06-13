@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
+import { Mode } from '../types';
 
-type Mode = 'draw' | 'select';
 const ModeBar: React.FC = () => {
   const modes = {
     draw: {
