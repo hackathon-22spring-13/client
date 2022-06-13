@@ -1,5 +1,5 @@
-import { IoShapes } from 'react-icons//io5';
 import { GiPencilRuler } from 'react-icons/gi';
+import { IoShapes, IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
 import { changeColor } from '../tools/color';
 import { changeLine } from '../tools/line';
@@ -33,12 +33,17 @@ const ToolBar: React.FC = () => {
       icon: <GiPencilRuler size={40} />,
       function: () => changeLine,
     },
+    {
+      name: 'クリア',
+      icon: <IoTrash size={40} />,
+      function: () => changeLine,
+    },
   ];
   return (
     <div className='border border-r-gray-300 w-24 grow'>
       <ul className='list-none'>
         {tools.map((tool) => (
-          <li className='border bg-gray-100 h-24' key={tool.name}>
+          <li className='border-b bg-gray-100 h-24' key={tool.name}>
             <button className='h-full w-full' onClick={tool.function}>
               <>
                 {tool.icon}

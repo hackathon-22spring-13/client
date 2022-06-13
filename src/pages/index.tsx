@@ -2,9 +2,9 @@ import axios from 'axios';
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import Button from '../components/Button';
 import Canvas from '../components/Canvas';
 import Result from '../components/Result';
+import Button from '../components/shared/Button';
 import { canvasState } from '../recoil/atoms/canvas';
 
 const Home: NextPage = () => {

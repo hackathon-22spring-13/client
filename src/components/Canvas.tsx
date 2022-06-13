@@ -2,6 +2,7 @@ import { fabric } from 'fabric';
 import { useEffect, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
+import ModeBar from './ModeBar';
 import ToolBar from './ToolBar';
 
 const Canvas: React.FC = () => {
@@ -12,7 +13,7 @@ const Canvas: React.FC = () => {
   useEffect(() => {
     const initCanvas = new fabric.Canvas(canvasRef.current, {
       isDrawingMode: true,
-      width: 1182,
+      width: 1086,
       height: 640,
     });
     setCanvas(initCanvas);
@@ -21,6 +22,7 @@ const Canvas: React.FC = () => {
     <div className='flex justify-between'>
       <ToolBar />
       <canvas ref={canvasRef} />
+      <ModeBar />
     </div>
   );
 };
