@@ -2,7 +2,9 @@ import axios from 'axios';
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import Button from '../components/Button';
 import Canvas from '../components/Canvas';
+import Result from '../components/Result';
 import { canvasState } from '../recoil/atoms/canvas';
 
 const Home: NextPage = () => {
@@ -28,17 +30,10 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className='mt-2 text-right w-full'>
-        <button className='rounded-lg bg-purple-400 text-white mr-2 p-2' onClick={handleToSvg}>
-          SVGへ変換！
-        </button>
-        <button className='rounded-lg bg-purple-400 text-white p-2' onClick={handleToTikz}>
-          TikZに変換！
-        </button>
+        <Button onClick={handleToSvg}>SVGに変換！</Button>
+        <Button onClick={handleToTikz}>TikZに変換！</Button>
       </div>
-      <section>
-        <h2>変換結果</h2>
-        <p className='border whitespace-pre-wrap'>{tikz}</p>
-      </section>
+      <Result result={tikz} />
     </div>
   );
 };
