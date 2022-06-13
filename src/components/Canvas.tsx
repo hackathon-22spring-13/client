@@ -19,9 +19,7 @@ const Canvas: React.FC = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className='flex justify-between'>
-      <div className='border-black border w-24 grow'>
-        <ToolBar />
-      </div>
+      <ToolBar />
       <canvas ref={canvasRef} />
     </div>
   );
