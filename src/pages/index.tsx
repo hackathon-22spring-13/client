@@ -1,21 +1,22 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
-import { useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useContext, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import Canvas from '../components/Canvas';
+import { CanvasContext } from '../components/CanvasProvider';
 import Result from '../components/Result';
 import Button from '../components/shared/Button';
-import { canvasState } from '../recoil/atoms/canvas';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 
 const Home: NextPage = () => {
-  const canvas = useRecoilValue(canvasState);
   const [tikz, setTikz] = useState('');
   const setShouldShowModal = useSetRecoilState(shouldShowModalState);
+  const { canvas } = useContext(CanvasContext);
   function handleToSvg() {
     if (canvas) {
       const SVG = canvas.toSVG();
       alert(SVG);
+      console.log(SVG);
     }
   }
   async function handleToTikz() {

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
 import { Mode } from '../types';
+import { CanvasContext } from './CanvasProvider';
 
 const ModeBar: React.FC = () => {
   const modes = {
@@ -15,12 +16,19 @@ const ModeBar: React.FC = () => {
     },
   };
   const [mode, setMode] = useState<Mode>('draw');
+  const { canvas } = useContext(CanvasContext);
 
   function handleChangeMode() {
     if (mode === 'draw') {
       setMode('select');
+      if (canvas !== null) {
+        canvas.isDrawingMode = false;
+      }
     } else {
       setMode('draw');
+      if (canvas !== null) {
+        canvas.isDrawingMode = true;
+      }
     }
   }
 

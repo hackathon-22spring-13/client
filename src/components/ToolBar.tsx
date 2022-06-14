@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { GiPencilRuler } from 'react-icons/gi';
 import { IoShapes, IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { canvasState } from '../recoil/atoms/canvas';
+import { useRecoilState } from 'recoil';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeColor, colors } from '../tools/color';
@@ -11,10 +10,11 @@ import { changeLine } from '../tools/line';
 import { changeObject, objects } from '../tools/object';
 import { changeWeight, weights } from '../tools/weight';
 import { Tool, ToolOption, Tools } from '../types';
+import { CanvasContext } from './CanvasProvider';
 import MenuModal from './MenuModal';
 
 const ToolBar: React.FC = () => {
-  const canvas = useRecoilValue(canvasState);
+  const { canvas } = useContext(CanvasContext);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);

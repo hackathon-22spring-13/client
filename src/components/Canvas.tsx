@@ -1,14 +1,12 @@
 import { fabric } from 'fabric';
-import { useEffect, useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { canvasState } from '../recoil/atoms/canvas';
+import { useContext, useEffect, useRef } from 'react';
+import { CanvasContext } from './CanvasProvider';
 import ModeBar from './ModeBar';
 import ToolBar from './ToolBar';
 
 const Canvas: React.FC = () => {
+  const { setCanvas } = useContext(CanvasContext);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  //const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
-  const setCanvas = useSetRecoilState(canvasState);
 
   useEffect(() => {
     const initCanvas = new fabric.Canvas(canvasRef.current, {
