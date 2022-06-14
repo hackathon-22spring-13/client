@@ -1,5 +1,18 @@
-export const changeWeight = (weight: number) => {
-  console.log(weight);
+export const changeWeight = (canvas: fabric.Canvas | null, weight: string) => {
+  if (canvas !== null && !isNaN(Number(weight))) {
+    canvas.freeDrawingBrush.width = Number(weight);
+  }
 };
 
-export const weights = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+export const weights = [
+  { name: '1', value: '1' },
+  { name: '2', value: '2' },
+  { name: '3', value: '3' },
+  { name: '4', value: '4' },
+  { name: '5', value: '5' },
+  { name: '6', value: '6' },
+  { name: '7', value: '7' },
+  { name: '8', value: '8' },
+  { name: '9', value: '9' },
+  { name: '10', value: '10' },
+];

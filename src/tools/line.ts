@@ -1,3 +1,5 @@
-export const changeLine = (line: string) => {
-  console.log(line);
+export const changeLine = (canvas: fabric.Canvas | null) => {
+  if (canvas !== null) {
+    console.log('line');
+  }
 };

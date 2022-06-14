@@ -1,15 +1,15 @@
-import { Tools } from '../types';
+import { Tool, ToolOption, Tools } from '../types';
 
 interface Props {
   selectedTool: Tools;
-  toolId: Tools;
-  menuItemList: string[];
+  menuItemList: ToolOption[];
+  tool: Tool;
 }
-const MenuModal: React.FC<Props> = ({ selectedTool, toolId, menuItemList }) => {
+const MenuModal: React.FC<Props> = ({ selectedTool, menuItemList, tool }) => {
   return (
     <div
       className={`${
-        selectedTool === toolId ? '' : 'hidden'
+        selectedTool === tool.id ? '' : 'hidden'
       } bg-gray-200 w-32 absolute top-0 left-24 z-2 rounded-md shadow`}
     >
       <ul>
@@ -20,7 +20,9 @@ const MenuModal: React.FC<Props> = ({ selectedTool, toolId, menuItemList }) => {
             }`}
             key={index}
           >
-            <button className='h-full w-full'>{menuItem}</button>
+            <button className='h-full w-full' onClick={() => tool.function(menuItem.value)}>
+              {menuItem.name}
+            </button>
             <div className='bg-white h-0.2' />
           </li>
         ))}

@@ -1,5 +1,18 @@
-export const changeColor = (color: string) => {
-  console.log(color);
+export const changeColor = (canvas: fabric.Canvas | null, color: string) => {
+  if (canvas !== null) {
+    canvas.freeDrawingBrush.color = color;
+  }
 };
 
-export const colors = ['赤', '青', '緑', '黄色', 'オレンジ', '紫', 'ピンク', '茶', '黒', '白'];
+export const colors = [
+  { name: '赤', value: 'red' },
+  { name: '青', value: 'blue' },
+  { name: '緑', value: 'green' },
+  { name: '黄色', value: 'yellow' },
+  { name: 'オレンジ', value: 'orange' },
+  { name: '紫', value: 'purple' },
+  { name: 'ピンク', value: '  pink' },
+  { name: '茶', value: 'brown' },
+  { name: '黒', value: 'black' },
+  { name: '白', value: 'white' },
+];

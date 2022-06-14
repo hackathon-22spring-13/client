@@ -10,13 +10,13 @@ import { changeColor, colors } from '../tools/color';
 import { changeLine } from '../tools/line';
 import { changeObject, objects } from '../tools/object';
 import { changeWeight, weights } from '../tools/weight';
-import { Tool, Tools } from '../types';
+import { Tool, ToolOption, Tools } from '../types';
 import MenuModal from './MenuModal';
 
 const ToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
-  const [menuItemList, setMenuItemList] = useState<string[]>();
+  const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
   const tools: Tool[] = [
     {
@@ -24,41 +24,41 @@ const ToolBar: React.FC = () => {
       id: 'color',
       icon: <MdColorLens size={40} />,
       items: colors,
-      function: () => changeColor,
+      function: (option: string) => changeColor(canvas, option),
     },
     {
       name: '太さ',
       id: 'weight',
       icon: <MdLineWeight size={40} />,
       items: weights,
-      function: () => changeWeight,
+      function: (option: string) => changeWeight(canvas, option),
     },
     {
       name: 'オブジェクト',
       id: 'object',
       icon: <IoShapes size={40} />,
       items: objects,
-      function: () => changeObject,
+      function: (option: string) => changeObject(canvas, option),
     },
     {
       name: '直線',
       id: 'line',
       icon: <GiPencilRuler size={40} />,
       items: [],
-      function: () => changeLine,
+      function: () => changeLine(canvas),
     },
     {
       name: 'クリア',
       id: 'clear',
       icon: <IoTrash size={40} />,
       items: [],
-      function: () => changeLine,
+      function: () => console.log('clear'),
     },
   ];
   function handleSelectTool(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     toolId: Tools,
-    toolItems: string[],
+    toolItems: ToolOption[],
   ) {
     e.stopPropagation();
     if (canvas === null) {
@@ -95,7 +95,7 @@ const ToolBar: React.FC = () => {
               </>
             </button>
             {menuItemList && shouldShowModal && (
-              <MenuModal menuItemList={menuItemList} selectedTool={selectedTool} toolId={tool.id} />
+              <MenuModal menuItemList={menuItemList} selectedTool={selectedTool} tool={tool} />
             )}
           </li>
         ))}
