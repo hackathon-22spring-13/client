@@ -6,7 +6,7 @@ import { selectedToolState } from '../recoil/atoms/tools';
 import { changeObject } from '../tools/object';
 import { CanvasContext } from './CanvasProvider';
 import LeftToolBar from './LeftToolBar';
-import ModeBar from './ModeBar';
+import RightToolBar from './RightToolBar';
 
 const Canvas: React.FC = () => {
   const { canvas, setCanvas } = useContext(CanvasContext);
@@ -40,7 +40,7 @@ const Canvas: React.FC = () => {
       <div onClick={(e) => handleAddObject(e)}>
         <canvas ref={canvasRef} />
       </div>
-      <ModeBar />
+      <RightToolBar />
     </div>
   );
 };

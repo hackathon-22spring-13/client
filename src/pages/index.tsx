@@ -1,31 +1,16 @@
-import axios from 'axios';
 import type { NextPage } from 'next';
-import { useContext, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Canvas from '../components/Canvas';
-import { CanvasContext } from '../components/CanvasProvider';
 import Result from '../components/Result';
-import Button from '../components/shared/Button';
 import { shouldShowModalState } from '../recoil/atoms/modal';
+import { tikzState } from '../recoil/atoms/tikz';
 import { selectedToolState } from '../recoil/atoms/tools';
 
 const Home: NextPage = () => {
-  const [tikz, setTikz] = useState('');
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
   const setSelectedTool = useSetRecoilState(selectedToolState);
-  const { canvas } = useContext(CanvasContext);
-  function handleToSvg() {
-    if (canvas) {
-      const SVG = canvas.toSVG();
-      alert(SVG);
-      console.log(SVG);
-    }
-  }
-  async function handleToTikz() {
-    const res = await axios.get('/api/tikz/text');
-    setTikz(res.data);
-    alert(res.data);
-  }
+  const tikz = useRecoilValue(tikzState);
+
   function handleCloseModal() {
     if (shouldShowModal) {
       setShouldShowModal(false);
@@ -40,10 +25,6 @@ const Home: NextPage = () => {
           <div className='border rounded-lg h-160 shadow-lg w-320'>
             <Canvas />
           </div>
-        </div>
-        <div className='mt-2 text-right w-full'>
-          <Button onClick={handleToSvg}>SVGに変換！</Button>
-          <Button onClick={handleToTikz}>TikZに変換！</Button>
         </div>
         <Result result={tikz} />
       </section>

@@ -9,7 +9,9 @@ import { changeLine } from '../tools/line';
 import { objects } from '../tools/object';
 import { Shape, Tool, ToolOption, Tools } from '../types';
 import { CanvasContext } from './CanvasProvider';
+import ConvertButton from './ConvertButton';
 import MenuModal from './MenuModal';
+import ModeButton from './ModeButton';
 
 const RightToolBar: React.FC = () => {
   const { canvas } = useContext(CanvasContext);
@@ -54,9 +56,13 @@ const RightToolBar: React.FC = () => {
       setShouldShowModal(true);
     }
   }
+
   return (
-    <div className='border border-r-gray-300 w-24 grow'>
+    <div className='border flex flex-col border-r-gray-300 w-24'>
       <ul className='list-none'>
+        <li>
+          <ModeButton />
+        </li>
         {tools.map((tool) => (
           <li
             className={`border-b h-24 relative ${
@@ -79,6 +85,9 @@ const RightToolBar: React.FC = () => {
           </li>
         ))}
       </ul>
+      <div className='flex-grow flex items-end'>
+        <ConvertButton />
+      </div>
     </div>
   );
 };

@@ -3,9 +3,8 @@ import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
 import { Mode } from '../types';
 import { CanvasContext } from './CanvasProvider';
-import RightToolBar from './RightToolBar';
 
-const ModeBar: React.FC = () => {
+const ModeButton: React.FC = () => {
   const modes = {
     draw: {
       name: 'お絵描きモード',
@@ -43,8 +42,7 @@ const ModeBar: React.FC = () => {
           </>
         </button>
       </div>
-      <RightToolBar />
     </div>
   );
 };
-export default ModeBar;
+export default ModeButton;
