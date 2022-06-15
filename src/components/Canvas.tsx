@@ -1,17 +1,17 @@
 import { fabric } from 'fabric';
 import { useContext, useEffect, useRef } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeObject } from '../tools/object';
 import { CanvasContext } from './CanvasProvider';
+import LeftToolBar from './LeftToolBar';
 import ModeBar from './ModeBar';
-import ToolBar from './ToolBar';
 
 const Canvas: React.FC = () => {
   const { canvas, setCanvas } = useContext(CanvasContext);
-  const selectedShape = useRecoilValue(selectedShapeState);
-  const selectedTool = useRecoilValue(selectedToolState);
+  const [selectedShape, setSelectedShape] = useRecoilState(selectedShapeState);
+  const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   function handleAddObject(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -20,6 +20,8 @@ const Canvas: React.FC = () => {
       const { width, height } = canvas;
       if (width !== undefined && height !== undefined && selectedTool === 'object') {
         changeObject(canvas, offsetX, offsetY, selectedShape);
+        setSelectedShape('');
+        setSelectedTool('');
       }
     }
   }
@@ -34,7 +36,7 @@ const Canvas: React.FC = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className='flex justify-between'>
-      <ToolBar />
+      <LeftToolBar />
       <div onClick={(e) => handleAddObject(e)}>
         <canvas ref={canvasRef} />
       </div>

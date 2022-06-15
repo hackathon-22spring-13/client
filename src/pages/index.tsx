@@ -1,16 +1,18 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
 import { useContext, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import Canvas from '../components/Canvas';
 import { CanvasContext } from '../components/CanvasProvider';
 import Result from '../components/Result';
 import Button from '../components/shared/Button';
 import { shouldShowModalState } from '../recoil/atoms/modal';
+import { selectedToolState } from '../recoil/atoms/tools';
 
 const Home: NextPage = () => {
   const [tikz, setTikz] = useState('');
-  const setShouldShowModal = useSetRecoilState(shouldShowModalState);
+  const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
+  const setSelectedTool = useSetRecoilState(selectedToolState);
   const { canvas } = useContext(CanvasContext);
   function handleToSvg() {
     if (canvas) {
@@ -24,8 +26,14 @@ const Home: NextPage = () => {
     setTikz(res.data);
     alert(res.data);
   }
+  function handleCloseModal() {
+    if (shouldShowModal) {
+      setShouldShowModal(false);
+      setSelectedTool('');
+    }
+  }
   return (
-    <div onClick={() => setShouldShowModal(false)}>
+    <div onClick={handleCloseModal}>
       <section className='mx-auto w-320'>
         <h1 className='my-8 text-center text-3xl'>I Love TikZ</h1>
         <div className='flex'>

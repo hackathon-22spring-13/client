@@ -21,7 +21,7 @@ export const changeObject = (
     } else if (object === 'circle') {
       const shape = new fabric.Circle({
         left: offsetX - 50,
-        top: offsetY,
+        top: offsetY - 50,
         radius: 50,
         fill: '#fff',
         stroke: '#000',
@@ -31,7 +31,7 @@ export const changeObject = (
     } else if (object === 'ellipse') {
       const shape = new fabric.Ellipse({
         left: offsetX - 50,
-        top: offsetY,
+        top: offsetY - 30,
         rx: 50,
         ry: 30,
         fill: '#fff',

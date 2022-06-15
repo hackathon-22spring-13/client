@@ -3,6 +3,7 @@ import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
 import { Mode } from '../types';
 import { CanvasContext } from './CanvasProvider';
+import RightToolBar from './RightToolBar';
 
 const ModeBar: React.FC = () => {
   const modes = {
@@ -34,12 +35,15 @@ const ModeBar: React.FC = () => {
 
   return (
     <div className='border border-l-gray-300 w-24'>
-      <button className='border-b bg-gray-100 h-24 w-full' onClick={handleChangeMode}>
-        <>
-          {modes[mode].icon}
-          <p>{modes[mode].name}</p>
-        </>
-      </button>
+      <div>
+        <button className='border-b bg-gray-200 h-24 w-full' onClick={handleChangeMode}>
+          <>
+            {modes[mode].icon}
+            <p>{modes[mode].name}</p>
+          </>
+        </button>
+      </div>
+      <RightToolBar />
     </div>
   );
 };

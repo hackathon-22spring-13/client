@@ -1,25 +1,20 @@
 import { useContext, useState } from 'react';
-import { GiPencilRuler } from 'react-icons/gi';
-import { IoShapes, IoTrash } from 'react-icons/io5';
+import { IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { shouldShowModalState } from '../recoil/atoms/modal';
-import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeColor, colors } from '../tools/color';
-import { changeLine } from '../tools/line';
-import { objects } from '../tools/object';
 import { changeWeight, weights } from '../tools/weight';
-import { Color, Shape, Tool, ToolOption, Tools } from '../types';
+import { Color, Tool, ToolOption, Tools } from '../types';
 import { CanvasContext } from './CanvasProvider';
 import MenuModal from './MenuModal';
 
-const ToolBar: React.FC = () => {
+const LeftToolBar: React.FC = () => {
   const { canvas } = useContext(CanvasContext);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
-  const setSelectedShapeState = useSetRecoilState(selectedShapeState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
     {
@@ -35,20 +30,6 @@ const ToolBar: React.FC = () => {
       icon: <MdLineWeight size={40} />,
       items: weights,
       function: (option: string) => changeWeight(canvas, option),
-    },
-    {
-      name: 'オブジェクト',
-      id: 'object',
-      icon: <IoShapes size={40} />,
-      items: objects,
-      function: (option: string) => setSelectedShapeState(option as Shape),
-    },
-    {
-      name: '直線',
-      id: 'line',
-      icon: <GiPencilRuler size={40} />,
-      items: [],
-      function: () => changeLine(canvas),
     },
     {
       name: 'クリア',
@@ -98,7 +79,7 @@ const ToolBar: React.FC = () => {
               </>
             </button>
             {menuItemList && shouldShowModal && (
-              <MenuModal menuItemList={menuItemList} selectedTool={selectedTool} tool={tool} />
+              <MenuModal location='left' menuItemList={menuItemList} tool={tool} />
             )}
           </li>
         ))}
@@ -107,4 +88,4 @@ const ToolBar: React.FC = () => {
   );
 };
 
-export default ToolBar;
+export default LeftToolBar;
