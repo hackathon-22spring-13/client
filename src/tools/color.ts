@@ -1,4 +1,6 @@
-export const changeColor = (canvas: fabric.Canvas | null, color: string) => {
+import { Color } from '../types';
+
+export const changeColor = (canvas: fabric.Canvas | null, color: Color) => {
   if (canvas !== null) {
     canvas.freeDrawingBrush.color = color;
   }

@@ -2,14 +2,15 @@ import { useContext, useState } from 'react';
 import { GiPencilRuler } from 'react-icons/gi';
 import { IoShapes, IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { shouldShowModalState } from '../recoil/atoms/modal';
+import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeColor, colors } from '../tools/color';
 import { changeLine } from '../tools/line';
-import { changeObject, objects } from '../tools/object';
+import { objects } from '../tools/object';
 import { changeWeight, weights } from '../tools/weight';
-import { Tool, ToolOption, Tools } from '../types';
+import { Color, Shape, Tool, ToolOption, Tools } from '../types';
 import { CanvasContext } from './CanvasProvider';
 import MenuModal from './MenuModal';
 
@@ -18,13 +19,15 @@ const ToolBar: React.FC = () => {
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
+  const setSelectedShapeState = useSetRecoilState(selectedShapeState);
   const tools: Tool[] = [
+    //todo:アサーションを消して型チェックする
     {
       name: '色',
       id: 'color',
       icon: <MdColorLens size={40} />,
       items: colors,
-      function: (option: string) => changeColor(canvas, option),
+      function: (color: string) => changeColor(canvas, color as Color),
     },
     {
       name: '太さ',
@@ -38,7 +41,7 @@ const ToolBar: React.FC = () => {
       id: 'object',
       icon: <IoShapes size={40} />,
       items: objects,
-      function: (option: string) => changeObject(canvas, option),
+      function: (option: string) => setSelectedShapeState(option as Shape),
     },
     {
       name: '直線',

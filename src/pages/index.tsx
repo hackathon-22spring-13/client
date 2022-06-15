@@ -20,7 +20,7 @@ const Home: NextPage = () => {
     }
   }
   async function handleToTikz() {
-    const res = await axios.get('/api/ping');
+    const res = await axios.get('/api/tikz/text');
     setTikz(res.data);
     alert(res.data);
   }
