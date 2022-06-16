@@ -67,7 +67,7 @@ const LeftToolBar: React.FC = () => {
       <ul className='list-none'>
         {tools.map((tool) => (
           <li
-            className={`border-b h-24 relative ${
+            className={`border-b h-24 relative hover:bg-gray-200 ${
               selectedTool === tool.id ? 'shadow bg-gray-200' : 'bg-gray-100'
             }`}
             key={tool.name}
