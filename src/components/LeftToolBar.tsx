@@ -19,7 +19,9 @@ const LeftToolBar: React.FC = () => {
     //todo:アサーションを消して型チェックする
     {
       name: `色：${
-        canvas?.freeDrawingBrush.color === 'rgb(0, 0, 0)' ? 'black' : canvas?.freeDrawingBrush.color
+        canvas?.freeDrawingBrush.color === 'rgb(0, 0, 0)'
+          ? '黒'
+          : colors.find((color) => color.value === canvas?.freeDrawingBrush.color)?.name
       }`,
       id: 'color',
       icon: <MdColorLens size={40} />,

@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
+import { useRecoilValue } from 'recoil';
+import { canvasState } from '../recoil/atoms/canvas';
 import { Mode } from '../types';
-import { CanvasContext } from './CanvasProvider';
 
 const ModeButton: React.FC = () => {
   const modes = {
@@ -16,7 +17,7 @@ const ModeButton: React.FC = () => {
     },
   };
   const [mode, setMode] = useState<Mode>('draw');
-  const { canvas } = useContext(CanvasContext);
+  const canvas = useRecoilValue(canvasState);
 
   function handleChangeMode() {
     if (mode === 'draw') {
