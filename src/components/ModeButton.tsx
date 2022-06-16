@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
 import { useRecoilValue } from 'recoil';
@@ -32,6 +32,9 @@ const ModeButton: React.FC = () => {
       }
     }
   }
+  useEffect(() => {
+    setMode(canvas?.isDrawingMode ? 'draw' : 'select');
+  }, [canvas?.isDrawingMode]);
 
   return (
     <div className='border border-l-gray-300 w-24'>

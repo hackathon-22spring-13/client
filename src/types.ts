@@ -28,3 +28,8 @@ export interface ToolOption {
   name: string;
   value: string;
 }
+
+export interface Line {
+  x: number;
+  y: number;
+}

@@ -6,6 +6,7 @@ import { canvasState } from '../recoil/atoms/canvas';
 import { selectedColorState } from '../recoil/atoms/colors';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
+import { selectedWeightState } from '../recoil/atoms/weight';
 import { changeColor, colors } from '../tools/color';
 import { changeWeight, weights } from '../tools/weight';
 import { Color, Tool, ToolOption, Tools } from '../types';
@@ -17,6 +18,7 @@ const LeftToolBar: React.FC = () => {
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
+  const selectedWeight = useRecoilValue(selectedWeightState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
     {
@@ -27,7 +29,7 @@ const LeftToolBar: React.FC = () => {
       function: (color: string) => changeColor(canvas, color as Color),
     },
     {
-      name: `太さ：${canvas?.freeDrawingBrush.width}`,
+      name: `太さ：${selectedWeight}`,
       id: 'weight',
       icon: <MdLineWeight size={40} />,
       items: weights,

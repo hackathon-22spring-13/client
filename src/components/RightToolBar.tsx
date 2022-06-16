@@ -6,7 +6,6 @@ import { canvasState } from '../recoil/atoms/canvas';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
-import { changeLine } from '../tools/line';
 import { objects } from '../tools/object';
 import { Shape, Tool, ToolOption, Tools } from '../types';
 import ConvertButton from './ConvertButton';
@@ -33,7 +32,7 @@ const RightToolBar: React.FC = () => {
       id: 'line',
       icon: <GiPencilRuler size={40} />,
       items: [],
-      function: () => changeLine(canvas),
+      function: () => console.log('change line'),
     },
   ];
   function handleSelectTool(
@@ -42,19 +41,12 @@ const RightToolBar: React.FC = () => {
     toolItems: ToolOption[],
   ) {
     e.stopPropagation();
-    if (canvas === null) {
-      return;
+    setSelectedTool(toolId);
+    if (canvas !== null) {
+      canvas.isDrawingMode = false;
     }
-    if (toolId === 'clear') {
-      const result = confirm('キャンバスの内容をクリアしてもよろしいですか？');
-      if (result) {
-        canvas.clear();
-      }
-    } else {
-      setSelectedTool(toolId);
-      setMenuItemList(toolItems);
-      setShouldShowModal(true);
-    }
+    setMenuItemList(toolItems);
+    setShouldShowModal(true);
   }
 
   return (
