@@ -10,6 +10,6 @@ module.exports = {
     config.plugins.push(new WindiCSSWebpackPlugin());
     return config;
   },
-  basePath: process.env.GITHUB_ACTIONS ? '/repository_name' : '',
+  basePath: process.env.GITHUB_ACTIONS ? '/client' : '',
   trailingSlash: true,
 };
