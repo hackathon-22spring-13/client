@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Canvas from '../components/Canvas';
 import Result from '../components/Result';
 import { lineState } from '../recoil/atoms/line';
@@ -9,12 +9,15 @@ import { selectedToolState } from '../recoil/atoms/tools';
 
 const Home: NextPage = () => {
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
-  const setSelectedTool = useSetRecoilState(selectedToolState);
+  const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const tikz = useRecoilValue(tikzState);
   const line = useRecoilValue(lineState);
 
   function handleCloseModal() {
-    if (shouldShowModal && line.x !== -1 && line.y !== -1) {
+    if (shouldShowModal) {
+      if (selectedTool === 'line' && line.x === -1 && line.y === -1) {
+        return;
+      }
       setShouldShowModal(false);
       setSelectedTool('');
     }
