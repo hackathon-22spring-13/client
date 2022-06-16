@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -14,9 +14,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - name: yarn install
+      - name: install
         run: yarn install
-      - name: yarn lint
+      - name: lint
         run: yarn lint
   build:
     runs-on: ubuntu-latest
@@ -25,7 +25,32 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - name: yarn install
+      - name: install
         run: yarn install
-      - name: yarn build
+      - name: build
         run: yarn build
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+      - uses: actions/checkout@v3
+
+      - name: setup
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: install
+        run: yarn install
+
+      - name: build
+        run: yarn build
+
+      - name: export
+        run: yarn export
+
+      - name: deploy
+        uses: peaceiris/github_deployment@v3
+        with:
+          github_token: ${secrets.GITHUB_TOKEN}
+          publish_dir: ./out
