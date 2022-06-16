@@ -45,5 +45,5 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          repo_token: ${secrets.CLIENT_DEPLOY_SECRET}
+          personal_token: ${secrets.CLIENT_DEPLOY_SECRET}
           publish_dir: ./out
