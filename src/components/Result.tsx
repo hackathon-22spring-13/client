@@ -14,8 +14,8 @@ const Result: React.FC<Props> = ({ result }) => {
     setIsCopied(false);
   }, [result]);
   return (
-    <section>
-      <h2>変換結果</h2>
+    <section className='my-4'>
+      <h2 className='text-xl'>変換結果</h2>
       <div className='relative'>
         <button
           className='rounded-md bg-purple-400 text-white p-2 top-2 right-2 absolute hover:bg-purple-500'
