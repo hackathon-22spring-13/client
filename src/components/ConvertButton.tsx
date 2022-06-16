@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { useContext } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { canvasState } from '../recoil/atoms/canvas';
 import { tikzState } from '../recoil/atoms/tikz';
-import { CanvasContext } from './CanvasProvider';
 
 const ConvertButton: React.FC = () => {
   const setTikz = useSetRecoilState(tikzState);
-  const { canvas } = useContext(CanvasContext);
+  const canvas = useRecoilValue(canvasState);
 
   function handleToSvg() {
     if (canvas) {

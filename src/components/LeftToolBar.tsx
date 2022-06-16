@@ -1,17 +1,17 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { canvasState } from '../recoil/atoms/canvas';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeColor, colors } from '../tools/color';
 import { changeWeight, weights } from '../tools/weight';
 import { Color, Tool, ToolOption, Tools } from '../types';
-import { CanvasContext } from './CanvasProvider';
 import MenuModal from './MenuModal';
 
 const LeftToolBar: React.FC = () => {
-  const { canvas } = useContext(CanvasContext);
+  const canvas = useRecoilValue(canvasState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);

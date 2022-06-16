@@ -1,15 +1,15 @@
 import { fabric } from 'fabric';
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
+import { canvasState } from '../recoil/atoms/canvas';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeObject } from '../tools/object';
-import { CanvasContext } from './CanvasProvider';
 import LeftToolBar from './LeftToolBar';
 import RightToolBar from './RightToolBar';
 
 const Canvas: React.FC = () => {
-  const { canvas, setCanvas } = useContext(CanvasContext);
+  const [canvas, setCanvas] = useRecoilState(canvasState);
   const [selectedShape, setSelectedShape] = useRecoilState(selectedShapeState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
