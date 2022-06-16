@@ -25,7 +25,7 @@ const ConvertButton: React.FC = () => {
       className='rounded-lg bg-purple-400 mx-1 text-white mb-4 w-full p-2 hover:bg-purple-500'
       onClick={handleToSvg}
     >
-      変換！
+      変換!
     </button>
   );
 };
