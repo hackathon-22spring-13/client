@@ -29,21 +29,21 @@ jobs:
         run: yarn install
       - name: build
         run: yarn build
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '16.x'
-  #     - name: install
-  #       run: yarn install
-  #     - name: build
-  #       run: yarn build
-  #     - name: export
-  #       run: yarn export
-  #     - name: deploy
-  #       uses: peaceiris/actions-gh-pages@v3
-  #       with:
-  #         personal_token: ${secrets.CLIENT_DEPLOY_SECRET}
-  #         publish_dir: ./out
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: install
+        run: yarn install
+      - name: build
+        run: yarn build
+      - name: export
+        run: yarn export
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${secrets.PERSONAL_TOKEN}
+          publish_dir: ./out
