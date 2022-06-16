@@ -36,6 +36,6 @@
     "windicss-webpack-plugin": "^1.7.3"
   },
   "resolutions": {
-    "canvas": "2.6.1"
+    "fabric/canvas": "2.7.0"
   }
 }
