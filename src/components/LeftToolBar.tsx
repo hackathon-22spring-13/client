@@ -18,14 +18,16 @@ const LeftToolBar: React.FC = () => {
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
     {
-      name: '色',
+      name: `色：${
+        canvas?.freeDrawingBrush.color === 'rgb(0, 0, 0)' ? 'black' : canvas?.freeDrawingBrush.color
+      }`,
       id: 'color',
       icon: <MdColorLens size={40} />,
       items: colors,
       function: (color: string) => changeColor(canvas, color as Color),
     },
     {
-      name: '太さ',
+      name: `太さ：${canvas?.freeDrawingBrush.width}`,
       id: 'weight',
       icon: <MdLineWeight size={40} />,
       items: weights,
@@ -59,6 +61,7 @@ const LeftToolBar: React.FC = () => {
       setShouldShowModal(true);
     }
   }
+
   return (
     <div className='border border-r-gray-300 w-24 grow'>
       <ul className='list-none'>

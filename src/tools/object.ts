@@ -13,7 +13,7 @@ export const changeObject = (
         top: offsetY,
         width: 100,
         height: 100,
-        fill: '#fff',
+        fill: 'transparent',
         stroke: '#000',
         strokeWidth: 1,
       });
@@ -23,7 +23,7 @@ export const changeObject = (
         left: offsetX - 50,
         top: offsetY - 50,
         radius: 50,
-        fill: '#fff',
+        fill: 'transparent',
         stroke: '#000',
         strokeWidth: 1,
       });
@@ -34,7 +34,7 @@ export const changeObject = (
         top: offsetY - 30,
         rx: 50,
         ry: 30,
-        fill: '#fff',
+        fill: 'transparent',
         stroke: '#000',
         strokeWidth: 1,
       });
@@ -45,7 +45,7 @@ export const changeObject = (
         top: offsetY,
         width: 100,
         height: 100,
-        fill: '#fff',
+        fill: 'transparent',
         stroke: '#000',
         strokeWidth: 1,
       });
