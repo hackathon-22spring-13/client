@@ -1,7 +1,8 @@
 import { fabric } from 'fabric';
 import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
+import { selectedColorState } from '../recoil/atoms/colors';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeObject } from '../tools/object';
@@ -12,6 +13,7 @@ const Canvas: React.FC = () => {
   const [canvas, setCanvas] = useRecoilState(canvasState);
   const [selectedShape, setSelectedShape] = useRecoilState(selectedShapeState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
+  const selectedColor = useRecoilValue(selectedColorState);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   function handleAddObject(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -19,7 +21,7 @@ const Canvas: React.FC = () => {
       const { offsetX, offsetY } = e.nativeEvent;
       const { width, height } = canvas;
       if (width !== undefined && height !== undefined && selectedTool === 'object') {
-        changeObject(canvas, offsetX, offsetY, selectedShape);
+        changeObject(canvas, offsetX, offsetY, selectedShape, selectedColor);
         setSelectedShape('');
         setSelectedTool('');
       }

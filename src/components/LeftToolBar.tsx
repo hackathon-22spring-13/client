@@ -3,6 +3,7 @@ import { IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
+import { selectedColorState } from '../recoil/atoms/colors';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { changeColor, colors } from '../tools/color';
@@ -12,17 +13,14 @@ import MenuModal from './MenuModal';
 
 const LeftToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
+  const selectedColor = useRecoilValue(selectedColorState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
     {
-      name: `色：${
-        canvas?.freeDrawingBrush.color === 'rgb(0, 0, 0)'
-          ? '黒'
-          : colors.find((color) => color.value === canvas?.freeDrawingBrush.color)?.name
-      }`,
+      name: `色：${colors.find((color) => color.value === selectedColor)?.name}`,
       id: 'color',
       icon: <MdColorLens size={40} />,
       items: colors,
@@ -78,10 +76,8 @@ const LeftToolBar: React.FC = () => {
               className='h-full w-full'
               onClick={(e) => handleSelectTool(e, tool.id, tool.items)}
             >
-              <>
-                {tool.icon}
-                <p>{tool.name}</p>
-              </>
+              {tool.icon}
+              <p>{tool.name}</p>
             </button>
             {menuItemList && shouldShowModal && (
               <MenuModal location='left' menuItemList={menuItemList} tool={tool} />

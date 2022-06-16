@@ -1,10 +1,12 @@
 import { fabric } from 'fabric';
+import { Color } from '../types';
 
 export const changeObject = (
   canvas: fabric.Canvas | null,
   offsetX: number,
   offsetY: number,
   object: string,
+  color: Color,
 ) => {
   if (canvas !== null) {
     if (object === 'rect') {
@@ -14,7 +16,7 @@ export const changeObject = (
         width: 100,
         height: 100,
         fill: 'transparent',
-        stroke: '#000',
+        stroke: color,
         strokeWidth: 1,
       });
       canvas.add(shape);
@@ -24,7 +26,7 @@ export const changeObject = (
         top: offsetY - 50,
         radius: 50,
         fill: 'transparent',
-        stroke: '#000',
+        stroke: color,
         strokeWidth: 1,
       });
       canvas.add(shape);
@@ -35,7 +37,7 @@ export const changeObject = (
         rx: 50,
         ry: 30,
         fill: 'transparent',
-        stroke: '#000',
+        stroke: color,
         strokeWidth: 1,
       });
       canvas.add(shape);
@@ -46,7 +48,7 @@ export const changeObject = (
         width: 100,
         height: 100,
         fill: 'transparent',
-        stroke: '#000',
+        stroke: color,
         strokeWidth: 1,
       });
       canvas.add(shape);

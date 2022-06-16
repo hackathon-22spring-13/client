@@ -1,8 +1,9 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { selectedColorState } from '../recoil/atoms/colors';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
-import { Tool, ToolOption, Tools } from '../types';
+import { Color, Tool, ToolOption, Tools } from '../types';
 
 interface Props {
   menuItemList: ToolOption[];
@@ -11,6 +12,7 @@ interface Props {
 }
 const MenuModal: React.FC<Props> = ({ menuItemList, tool, location }) => {
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
+  const setSelectedColor = useSetRecoilState(selectedColorState);
   const setShouldShowModal = useSetRecoilState(shouldShowModalState);
   function handleClick(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -20,6 +22,9 @@ const MenuModal: React.FC<Props> = ({ menuItemList, tool, location }) => {
   ) {
     e.stopPropagation();
     onClick(value);
+    if (toolId === 'color') {
+      setSelectedColor(value as Color);
+    }
     if (toolId === 'color' || toolId === 'weight') {
       setSelectedTool('');
     }
