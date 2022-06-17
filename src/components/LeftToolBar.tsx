@@ -75,7 +75,7 @@ const LeftToolBar: React.FC = () => {
             key={tool.name}
           >
             <button
-              className='h-full w-full'
+              className='flex flex-col h-full w-full justify-center items-center'
               onClick={(e) => handleSelectTool(e, tool.id, tool.items)}
             >
               {tool.icon}

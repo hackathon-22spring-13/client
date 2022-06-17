@@ -57,19 +57,17 @@ const RightToolBar: React.FC = () => {
         </li>
         {tools.map((tool) => (
           <li
-            className={`border-b h-24 relative hover:bg-gray-200 ${
+            className={`flex border-b h-24 relative hover:bg-gray-200 ${
               selectedTool === tool.id ? 'shadow bg-gray-200' : 'bg-gray-100'
             }`}
             key={tool.name}
           >
             <button
-              className='h-full w-full'
+              className='flex flex-col h-full w-full justify-center items-center'
               onClick={(e) => handleSelectTool(e, tool.id, tool.items)}
             >
-              <>
-                {tool.icon}
-                <p>{tool.name}</p>
-              </>
+              {tool.icon}
+              <p>{tool.name}</p>
             </button>
             {menuItemList && shouldShowModal && (
               <MenuModal location='right' menuItemList={menuItemList} tool={tool} />
