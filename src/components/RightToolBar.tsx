@@ -3,6 +3,7 @@ import { GiPencilRuler } from 'react-icons/gi';
 import { IoShapes } from 'react-icons/io5';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
+import { lineState } from '../recoil/atoms/line';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
@@ -15,13 +16,15 @@ import ModeButton from './ModeButton';
 const RightToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
+  const setLine = useSetRecoilState(lineState);
+  const line = useRecoilValue(lineState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
   const setSelectedShapeState = useSetRecoilState(selectedShapeState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
     {
-      name: 'オブジェクト',
+      name: '図形',
       id: 'object',
       icon: <IoShapes size={40} />,
       items: objects,
@@ -42,6 +45,7 @@ const RightToolBar: React.FC = () => {
   ) {
     e.stopPropagation();
     setSelectedTool(toolId);
+    setLine({ x: -1, y: -1 });
     if (canvas !== null) {
       canvas.isDrawingMode = false;
     }
@@ -78,6 +82,8 @@ const RightToolBar: React.FC = () => {
       <div className='flex-grow flex items-end'>
         <ConvertButton />
       </div>
+      {line.x}
+      {line.y}
     </div>
   );
 };

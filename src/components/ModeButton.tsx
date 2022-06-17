@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { GrSelect } from 'react-icons/gr';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
+import { lineState } from '../recoil/atoms/line';
 import { Mode } from '../types';
 
 const ModeButton: React.FC = () => {
@@ -17,9 +18,11 @@ const ModeButton: React.FC = () => {
     },
   };
   const [mode, setMode] = useState<Mode>('draw');
+  const setLine = useSetRecoilState(lineState);
   const canvas = useRecoilValue(canvasState);
 
   function handleChangeMode() {
+    setLine({ x: -1, y: -1 });
     if (mode === 'draw') {
       setMode('select');
       if (canvas !== null) {
