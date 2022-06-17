@@ -15,15 +15,20 @@ const ConvertButton: React.FC = () => {
     }
   }
   async function handleToTikz() {
-    const res = await axios.get('/api/tikz/text');
-    setTikz(res.data);
-    alert(res.data);
+    if (canvas) {
+      const svgBlob = new Blob([canvas.toSVG()], { type: 'image/svg+xml' });
+      const formData = new FormData();
+      formData.append('svg_file', svgBlob);
+      const res = await axios.post('http://localhost:5000/file', formData);
+      setTikz(res.data);
+      alert('succeeded');
+    }
   }
 
   return (
     <button
       className='rounded-lg bg-purple-400 mx-1 text-white mb-4 w-full p-2 hover:bg-purple-500'
-      onClick={handleToSvg}
+      onClick={handleToTikz}
     >
       変換!
     </button>
