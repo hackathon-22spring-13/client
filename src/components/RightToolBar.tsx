@@ -17,7 +17,6 @@ const RightToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const setLine = useSetRecoilState(lineState);
-  const line = useRecoilValue(lineState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
   const setSelectedShapeState = useSetRecoilState(selectedShapeState);
@@ -82,8 +81,6 @@ const RightToolBar: React.FC = () => {
       <div className='flex-grow flex items-end'>
         <ConvertButton />
       </div>
-      {line.x}
-      {line.y}
     </div>
   );
 };
