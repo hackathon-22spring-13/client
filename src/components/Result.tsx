@@ -34,7 +34,7 @@ const Result: React.FC<Props> = ({ result }) => {
           {isCopied ? 'コピーしました！' : 'コピー'}
         </button>
         <button
-          className='rounded-md bg-purple-500 text-white p-2 top-2 right-20 absolute hover:bg-purple-600'
+          className='rounded-md bg-purple-500 text-white p-2 top-15 right-2 absolute hover:bg-purple-600'
           onClick={(e) => handleDownload(e)}
         >
           <a download='tikz.tex' href={texUrl}>
