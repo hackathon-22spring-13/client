@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { HiCursorClick } from 'react-icons/hi';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
-import { lineState } from '../recoil/atoms/line';
 import type { Mode } from '../types';
 
 const ModeButton: React.FC = () => {
@@ -18,7 +17,6 @@ const ModeButton: React.FC = () => {
     },
   };
   const [mode, setMode] = useState<Mode>('draw');
-  const setLine = useSetRecoilState(lineState);
   const canvas = useRecoilValue(canvasState);
 
   function handleChangeMode() {

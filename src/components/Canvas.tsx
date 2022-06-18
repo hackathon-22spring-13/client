@@ -30,6 +30,11 @@ const Canvas: React.FC = () => {
         setSelectedTool('');
       }
     }
+    if (selectedTool === 'textbox') {
+      const { offsetX, offsetY } = e.nativeEvent;
+      addTextbox(canvas, offsetX, offsetY);
+      setSelectedTool('');
+    }
   }
 
   function handleDragStart(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -52,12 +57,6 @@ const Canvas: React.FC = () => {
         );
         setSelectedTool('');
       }
-    }
-
-    if (selectedTool === 'textbox') {
-      const { offsetX, offsetY } = e.nativeEvent;
-      addTextbox(canvas, offsetX, offsetY);
-      setSelectedTool('');
     }
   }
 
