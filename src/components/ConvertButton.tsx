@@ -2,11 +2,12 @@ import axios from 'axios';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { isSucceededState, texUrlState } from '../recoil/atoms/texUrl';
-import { tikzState } from '../recoil/atoms/tikz';
+import { tikzState, tikzTextState } from '../recoil/atoms/tikz';
 
 const ConvertButton: React.FC = () => {
   const setTikz = useSetRecoilState(tikzState);
   const setTexUrl = useSetRecoilState(texUrlState);
+  const setTikzText = useSetRecoilState(tikzTextState);
   const canvas = useRecoilValue(canvasState);
   const [isSucceeded, setIsSucceeded] = useRecoilState(isSucceededState);
 
@@ -25,6 +26,18 @@ const ConvertButton: React.FC = () => {
         setTexUrl(URL.createObjectURL(texBlob));
         setIsSucceeded(true);
       } catch (err) {
+        setIsSucceeded(false);
+        alert('failed!');
+      }
+      try {
+        const res = await axios.post(
+          'https://hackaton_22spring_13.trap.show/server/tikz/text',
+          formData,
+        );
+        setTikzText(res.data.tikz);
+        setIsSucceeded(true);
+      } catch (err) {
+        setIsSucceeded(false);
         alert('failed!');
       }
     }

@@ -7,7 +7,6 @@ import Result from '../components/Result';
 import { canvasState } from '../recoil/atoms/canvas';
 import { lineState } from '../recoil/atoms/line';
 import { shouldShowManualModalState, shouldShowMenuModalState } from '../recoil/atoms/modal';
-import { tikzState } from '../recoil/atoms/tikz';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { clearSelectedObjects } from '../tools/clear';
 
@@ -17,7 +16,6 @@ const Home: NextPage = () => {
   const [shouldShowManualModal, setShouldShowManualModal] = useRecoilState(
     shouldShowManualModalState,
   );
-  const tikz = useRecoilValue(tikzState);
   const line = useRecoilValue(lineState);
   const canvas = useRecoilValue(canvasState);
   function handleCloseModal() {
@@ -37,6 +35,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     document.addEventListener('keydown', handleDeleteObjects, false);
   }, [canvas]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div onClick={handleCloseModal}>
       <section className='mx-auto w-320 relative'>
@@ -50,7 +49,7 @@ const Home: NextPage = () => {
         <div className='border rounded-lg h-160 shadow-lg w-320'>
           <Canvas />
         </div>
-        <Result result={tikz} />
+        <Result />
       </section>
       {shouldShowManualModal && <ManualModal />}
     </div>

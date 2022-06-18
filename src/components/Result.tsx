@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { MdContentCopy } from 'react-icons/md';
 import { useRecoilValue } from 'recoil';
 import { texUrlState } from '../recoil/atoms/texUrl';
-interface Props {
-  result: string;
-}
+import { tikzState, tikzTextState } from '../recoil/atoms/tikz';
 
-const Result: React.FC<Props> = ({ result }) => {
+const Result: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
   const texUrl = useRecoilValue(texUrlState);
+  const tikz = useRecoilValue(tikzState);
+  const tikzText = useRecoilValue(tikzTextState);
+
   function handleCopy() {
-    navigator.clipboard.writeText(result);
+    navigator.clipboard.writeText(tikz);
     setIsCopied(true);
   }
   function handleDownload(e: React.MouseEvent<HTMLButtonElement>) {
@@ -21,7 +22,8 @@ const Result: React.FC<Props> = ({ result }) => {
   }
   useEffect(() => {
     setIsCopied(false);
-  }, [result]);
+  }, [tikz]);
+
   return (
     <section className='my-4'>
       <h2 className='text-xl'>変換結果</h2>
@@ -42,7 +44,7 @@ const Result: React.FC<Props> = ({ result }) => {
           </a>
         </button>
         <p className='border bg-dark-100 min-h-32 p-1 text-light-400 whitespace-pre-wrap'>
-          {result}
+          {tikzText}
         </p>
       </div>
     </section>
