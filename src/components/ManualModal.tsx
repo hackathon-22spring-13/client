@@ -5,7 +5,7 @@ const WorkModal: React.FC = () => {
   const setShouldShowManualModal = useSetRecoilState(shouldShowManualModalState);
   return (
     <div
-      className='h-full bg-gray-300/50 w-full top-0 left-0 z-3 fixed'
+      className='h-full bg-dark-300/50 w-full top-0 left-0 z-3 fixed'
       onClick={() => setShouldShowManualModal(false)}
     >
       <div
@@ -19,6 +19,7 @@ const WorkModal: React.FC = () => {
             <li>選択モードでは図形や線の選択・修正、選択したものの削除などができます。</li>
             <li>図形ツールは図形選択後、クリックした位置に図形を配置できます。</li>
             <li>直線ツールは始点をクリックした後、そのまま終点をクリックすると直線が引けます。</li>
+            <li>文字ツールはクリックした位置にテキストボックスを配置できます。</li>
             <li>変換ボタンを押すと変換結果が下に表示されます。</li>
             <li>変換結果はテキストでのコピーと、TeX形式でダウンロードができます。</li>
           </ul>
