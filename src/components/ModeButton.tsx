@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
-import { GrSelect } from 'react-icons/gr';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { HiCursorClick } from 'react-icons/hi';
+import { useRecoilValue } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
-import { lineState } from '../recoil/atoms/line';
 import type { Mode } from '../types';
 
 const ModeButton: React.FC = () => {
@@ -14,15 +13,13 @@ const ModeButton: React.FC = () => {
     },
     select: {
       name: '選択モード',
-      icon: <GrSelect size={40} />,
+      icon: <HiCursorClick size={40} />,
     },
   };
   const [mode, setMode] = useState<Mode>('draw');
-  const setLine = useSetRecoilState(lineState);
   const canvas = useRecoilValue(canvasState);
 
   function handleChangeMode() {
-    setLine({ x: -1, y: -1 });
     if (mode === 'draw') {
       setMode('select');
       if (canvas !== null) {

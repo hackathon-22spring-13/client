@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { GiPencilRuler } from 'react-icons/gi';
 import { IoShapes } from 'react-icons/io5';
+import { RiCharacterRecognitionFill } from 'react-icons/ri';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
-import { lineState } from '../recoil/atoms/line';
 import { shouldShowMenuModalState } from '../recoil/atoms/modal';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
@@ -16,7 +16,6 @@ import ModeButton from './ModeButton';
 const RightToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
-  const setLine = useSetRecoilState(lineState);
   const selectedShape = useRecoilValue(selectedShapeState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
@@ -39,6 +38,13 @@ const RightToolBar: React.FC = () => {
       items: [],
       function: () => console.log('change line'),
     },
+    {
+      name: '文字',
+      id: 'textbox',
+      icon: <RiCharacterRecognitionFill size={40} />,
+      items: [],
+      function: () => console.log('add textbox'),
+    },
   ];
   function handleSelectTool(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -47,7 +53,6 @@ const RightToolBar: React.FC = () => {
   ) {
     e.stopPropagation();
     setSelectedTool(toolId);
-    setLine({ x: -1, y: -1 });
     if (canvas !== null) {
       canvas.isDrawingMode = false;
     }
