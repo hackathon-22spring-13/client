@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
-import { texUrlState } from '../recoil/atoms/texUrl';
+import { isSucceededState, texUrlState } from '../recoil/atoms/texUrl';
 import { tikzState } from '../recoil/atoms/tikz';
 
 const ConvertButton: React.FC = () => {
   const setTikz = useSetRecoilState(tikzState);
   const setTexUrl = useSetRecoilState(texUrlState);
   const canvas = useRecoilValue(canvasState);
+  const [isSucceeded, setIsSucceeded] = useRecoilState(isSucceededState);
 
   async function handleToTikz() {
     if (canvas) {
@@ -22,7 +23,7 @@ const ConvertButton: React.FC = () => {
         setTikz(res.data);
         const texBlob = new Blob([res.data], { type: 'application/x-tex' });
         setTexUrl(URL.createObjectURL(texBlob));
-        alert('succeeded!');
+        setIsSucceeded(true);
       } catch (err) {
         alert('failed!');
       }
@@ -30,12 +31,15 @@ const ConvertButton: React.FC = () => {
   }
 
   return (
-    <button
-      className='rounded-lg bg-purple-500 mx-1 text-white mb-4 w-full p-2 hover:bg-purple-600'
-      onClick={handleToTikz}
-    >
-      変換!
-    </button>
+    <div className='flex flex-col w-full'>
+      <p className='text-center'>{isSucceeded && '変換成功！'}</p>
+      <button
+        className='rounded-lg bg-purple-500 text-white mb-4 w-full p-2 block hover:bg-purple-600'
+        onClick={handleToTikz}
+      >
+        変換!
+      </button>
+    </div>
   );
 };
 

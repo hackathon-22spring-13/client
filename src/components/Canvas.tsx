@@ -1,10 +1,11 @@
 import { fabric } from 'fabric';
 import { useEffect, useRef } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { selectedColorState } from '../recoil/atoms/colors';
 import { lineState } from '../recoil/atoms/line';
 import { selectedShapeState } from '../recoil/atoms/object';
+import { isSucceededState } from '../recoil/atoms/texUrl';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { selectedWeightState } from '../recoil/atoms/weight';
 import { changeObject } from '../tools/object';
@@ -17,6 +18,7 @@ const Canvas: React.FC = () => {
   const [selectedShape, setSelectedShape] = useRecoilState(selectedShapeState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [line, setLine] = useRecoilState(lineState);
+  const setIsSucceeded = useSetRecoilState(isSucceededState);
   const selectedWeight = useRecoilValue(selectedWeightState);
   const selectedColor = useRecoilValue(selectedColorState);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -35,6 +37,7 @@ const Canvas: React.FC = () => {
       addTextbox(canvas, offsetX, offsetY);
       setSelectedTool('');
     }
+    setIsSucceeded(false);
   }
 
   function handleDragStart(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
