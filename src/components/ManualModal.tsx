@@ -9,7 +9,7 @@ const WorkModal: React.FC = () => {
       onClick={() => setShouldShowManualModal(false)}
     >
       <div
-        className='bg-white my-auto mx-auto h-2/5 shadow-lg px-12 pt-8 inset-0 w-1/3 absolute md:w-2/5'
+        className='bg-white my-auto mx-auto rounded-3xl h-2/5 shadow-lg px-12 pt-8 inset-0 w-1/3 absolute md:w-2/5'
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className='text-center text-2xl'>説明書</h2>
