@@ -47,7 +47,7 @@ const ConvertButton: React.FC = () => {
     <div className='flex flex-col w-full'>
       <p className='text-center'>{isSucceeded && '変換成功！'}</p>
       <button
-        className='rounded-lg bg-purple-500 text-white mb-4 w-full p-2 block hover:bg-purple-600'
+        className='rounded-lg bg-purple-500 mx-1 text-white mb-4 p-2 block hover:bg-purple-600'
         onClick={handleToTikz}
       >
         変換!
