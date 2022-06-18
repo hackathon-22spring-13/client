@@ -9,6 +9,19 @@ const ConvertButton: React.FC = () => {
   const setTexUrl = useSetRecoilState(texUrlState);
   const canvas = useRecoilValue(canvasState);
 
+  function b64toBlob(base64: string) {
+    const bin = atob(base64.replace(/^.*,/, ''));
+    const buffer = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) {
+      buffer[i] = bin.charCodeAt(i);
+    }
+    // Blobを作成
+    const blob = new Blob([buffer.buffer], {
+      type: 'image/png',
+    });
+    return blob;
+  }
+
   async function handleToTikz() {
     if (canvas) {
       const svgBlob = new Blob([canvas.toSVG()], { type: 'image/svg+xml' });
@@ -22,13 +35,31 @@ const ConvertButton: React.FC = () => {
     }
   }
 
+  async function handleToImage() {
+    if (canvas) {
+      const formData = new FormData();
+      formData.append('svg_file', b64toBlob(canvas.toDataURL()));
+      const res = await axios.post('http://localhost:5000/file', formData);
+      setTexUrl(res.data);
+      alert('succeeded!');
+    }
+  }
+
   return (
-    <button
-      className='rounded-lg bg-purple-500 mx-1 text-white mb-4 w-full p-2 hover:bg-purple-600'
-      onClick={handleToTikz}
-    >
-      変換!
-    </button>
+    <>
+      <button
+        className='rounded-lg bg-purple-500 mx-1 text-white mb-4 w-full p-2 hover:bg-purple-600'
+        onClick={handleToImage}
+      >
+        pngにして変換!
+      </button>
+      <button
+        className='rounded-lg bg-purple-500 mx-1 text-white mb-4 w-full p-2 hover:bg-purple-600'
+        onClick={handleToTikz}
+      >
+        svgにして変換!
+      </button>
+    </>
   );
 };
 
