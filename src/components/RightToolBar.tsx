@@ -39,10 +39,10 @@ const RightToolBar: React.FC = () => {
     },
     {
       name: '文字',
-      id: 'character',
+      id: 'textbox',
       icon: <RiCharacterRecognitionFill size={40} />,
       items: [],
-      function: () => console.log('add character'),
+      function: () => console.log('add textbox'),
     },
   ];
   function handleSelectTool(

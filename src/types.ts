@@ -12,7 +12,7 @@ export type Tools =
   | 'line'
   | 'clear'
   | 'selectedClear'
-  | 'character'
+  | 'textbox'
   | '';
 
 export type Mode = 'draw' | 'select';
