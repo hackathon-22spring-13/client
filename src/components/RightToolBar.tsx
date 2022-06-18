@@ -61,14 +61,14 @@ const RightToolBar: React.FC = () => {
   }
 
   return (
-    <div className='border flex flex-col border-r-gray-300 w-24'>
+    <div className='border rounded-r-md flex flex-col border-r-gray-300 w-24'>
       <ul className='list-none'>
-        <li>
+        <li className='rounded-tr-md bg-gray-300 h-24'>
           <ModeButton />
         </li>
         {tools.map((tool) => (
           <li
-            className={`flex border-b h-24 relative hover:bg-gray-200 ${
+            className={`border-b h-24 relative hover:bg-gray-200 ${
               selectedTool === tool.id ? 'shadow bg-gray-200' : 'bg-gray-100'
             }`}
             key={tool.name}

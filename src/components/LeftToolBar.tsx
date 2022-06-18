@@ -79,13 +79,13 @@ const LeftToolBar: React.FC = () => {
   }
 
   return (
-    <div className='border border-r-gray-300 w-24 grow'>
+    <div className='border rounded-l-md border-r-gray-300 w-24 grow'>
       <ul className='list-none'>
-        {tools.map((tool) => (
+        {tools.map((tool, index) => (
           <li
             className={`border-b h-24 relative hover:bg-gray-200 ${
               selectedTool === tool.id ? 'shadow bg-gray-200' : 'bg-gray-100'
-            }`}
+            } ${index === 0 ? 'rounded-tl-md' : ''}`}
             key={tool.name}
           >
             <button

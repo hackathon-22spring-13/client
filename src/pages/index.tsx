@@ -42,7 +42,7 @@ const Home: NextPage = () => {
       <section className='mx-auto w-320 relative'>
         <h1 className='my-8 text-center text-3xl'>I Love TikZ</h1>
         <button
-          className='rounded-lg bg-purple-500 text-white p-2 top-0 right-0 absolute hover:bg-purple-600'
+          className='rounded-lg bg-purple-500 text-white p-2 top-0 left-0 absolute hover:bg-purple-600'
           onClick={() => setShouldShowManualModal(true)}
         >
           説明書を表示

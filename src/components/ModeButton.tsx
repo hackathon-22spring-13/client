@@ -37,15 +37,13 @@ const ModeButton: React.FC = () => {
   }, [canvas?.isDrawingMode]);
 
   return (
-    <div className='border border-l-gray-300 h-24 w-24'>
-      <button
-        className='border-b flex flex-col h-full bg-gray-200 w-full justify-center items-center  '
-        onClick={handleChangeMode}
-      >
-        {modes[mode].icon}
-        <p>{modes[mode].name}</p>
-      </button>
-    </div>
+    <button
+      className='border-b flex flex-col h-full w-full justify-center items-center'
+      onClick={handleChangeMode}
+    >
+      {modes[mode].icon}
+      <p>{modes[mode].name}</p>
+    </button>
   );
 };
 export default ModeButton;
