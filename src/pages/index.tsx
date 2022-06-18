@@ -1,12 +1,15 @@
 import type { NextPage } from 'next';
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Canvas from '../components/Canvas';
 import ManualModal from '../components/ManualModal';
 import Result from '../components/Result';
+import { canvasState } from '../recoil/atoms/canvas';
 import { lineState } from '../recoil/atoms/line';
 import { shouldShowManualModalState, shouldShowMenuModalState } from '../recoil/atoms/modal';
 import { tikzState } from '../recoil/atoms/tikz';
 import { selectedToolState } from '../recoil/atoms/tools';
+import { clearSelectedObjects } from '../tools/clear';
 
 const Home: NextPage = () => {
   const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
@@ -16,6 +19,7 @@ const Home: NextPage = () => {
   );
   const tikz = useRecoilValue(tikzState);
   const line = useRecoilValue(lineState);
+  const canvas = useRecoilValue(canvasState);
 
   function handleCloseModal() {
     if (shouldShowMenuModal) {
@@ -26,6 +30,14 @@ const Home: NextPage = () => {
       setSelectedTool('');
     }
   }
+  const handleDeleteObject = ((e:KeyboardEvent)=>{
+    if (canvas!==null && e.key==='Delete'){
+      clearSelectedObjects(canvas);
+    }
+  });
+  useEffect(() => {
+    document.addEventListener("keydown", handleDeleteObject, false);
+  });
   return (
     <div onClick={handleCloseModal}>
       <section className='mx-auto w-320 relative'>
