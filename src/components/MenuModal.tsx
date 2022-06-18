@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedColorState } from '../recoil/atoms/colors';
-import { shouldShowModalState } from '../recoil/atoms/modal';
+import { shouldShowMenuModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { selectedWeightState } from '../recoil/atoms/weight';
 import type { Color, Tool, ToolOption, Tools } from '../types';
@@ -15,7 +15,7 @@ const MenuModal: React.FC<Props> = ({ menuItemList, tool, location }) => {
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const setSelectedColor = useSetRecoilState(selectedColorState);
   const setSelectedWeight = useSetRecoilState(selectedWeightState);
-  const setShouldShowModal = useSetRecoilState(shouldShowModalState);
+  const setShouldShowMenuModal = useSetRecoilState(shouldShowMenuModalState);
   function handleClick(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     toolId: Tools,
@@ -32,7 +32,7 @@ const MenuModal: React.FC<Props> = ({ menuItemList, tool, location }) => {
       setSelectedWeight(value);
       setSelectedTool('');
     }
-    setShouldShowModal(false);
+    setShouldShowMenuModal(false);
   }
   return (
     <div

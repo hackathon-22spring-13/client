@@ -5,7 +5,7 @@ import { MdColorLens, MdLineWeight } from 'react-icons/md';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { selectedColorState } from '../recoil/atoms/colors';
-import { shouldShowModalState } from '../recoil/atoms/modal';
+import { shouldShowMenuModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { selectedWeightState } from '../recoil/atoms/weight';
 import { clearSelectedObjects } from '../tools/clear';
@@ -19,7 +19,7 @@ const LeftToolBar: React.FC = () => {
   const selectedColor = useRecoilValue(selectedColorState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
-  const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
+  const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
   const selectedWeight = useRecoilValue(selectedWeightState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
@@ -74,7 +74,7 @@ const LeftToolBar: React.FC = () => {
     } else {
       setSelectedTool(toolId);
       setMenuItemList(toolItems);
-      setShouldShowModal(true);
+      setShouldShowMenuModal(true);
     }
   }
 
@@ -95,7 +95,7 @@ const LeftToolBar: React.FC = () => {
               {tool.icon}
               <p>{tool.name}</p>
             </button>
-            {menuItemList && shouldShowModal && (
+            {menuItemList && shouldShowMenuModal && (
               <MenuModal location='left' menuItemList={menuItemList} tool={tool} />
             )}
           </li>

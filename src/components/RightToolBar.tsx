@@ -4,7 +4,7 @@ import { IoShapes } from 'react-icons/io5';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { lineState } from '../recoil/atoms/line';
-import { shouldShowModalState } from '../recoil/atoms/modal';
+import { shouldShowMenuModalState } from '../recoil/atoms/modal';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { objects } from '../tools/object';
@@ -18,7 +18,7 @@ const RightToolBar: React.FC = () => {
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const setLine = useSetRecoilState(lineState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
-  const [shouldShowModal, setShouldShowModal] = useRecoilState(shouldShowModalState);
+  const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
   const setSelectedShapeState = useSetRecoilState(selectedShapeState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
@@ -49,7 +49,7 @@ const RightToolBar: React.FC = () => {
       canvas.isDrawingMode = false;
     }
     setMenuItemList(toolItems);
-    setShouldShowModal(true);
+    setShouldShowMenuModal(true);
   }
 
   return (
@@ -72,7 +72,7 @@ const RightToolBar: React.FC = () => {
               {tool.icon}
               <p>{tool.name}</p>
             </button>
-            {menuItemList && shouldShowModal && (
+            {menuItemList && shouldShowMenuModal && (
               <MenuModal location='right' menuItemList={menuItemList} tool={tool} />
             )}
           </li>
