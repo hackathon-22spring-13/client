@@ -67,6 +67,7 @@ const LeftToolBar: React.FC = () => {
         canvas.clear();
       }
     } else if (toolId === 'selectedClear') {
+      console.log(canvas.getActiveObjects());
       const result = confirm('選択したものを削除してもよろしいですか？');
       if (result) {
         clearSelectedObjects(canvas);
