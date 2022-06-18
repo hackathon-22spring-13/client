@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BsEraser } from 'react-icons/bs';
 import { IoTrash } from 'react-icons/io5';
 import { MdColorLens, MdLineWeight } from 'react-icons/md';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -7,9 +8,10 @@ import { selectedColorState } from '../recoil/atoms/colors';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { selectedWeightState } from '../recoil/atoms/weight';
+import { clearSelectedObjects } from '../tools/clear';
 import { changeColor, colors } from '../tools/color';
 import { changeWeight, weights } from '../tools/weight';
-import { Color, Tool, ToolOption, Tools } from '../types';
+import type { Color, Tool, ToolOption, Tools } from '../types';
 import MenuModal from './MenuModal';
 
 const LeftToolBar: React.FC = () => {
@@ -42,6 +44,13 @@ const LeftToolBar: React.FC = () => {
       items: [],
       function: () => console.log('clear'),
     },
+    {
+      name: '選択したものの削除',
+      id: 'selectedClear',
+      icon: <BsEraser size={40} />,
+      items: [],
+      function: () => console.log('selectedClear'),
+    },
   ];
   function handleSelectTool(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -56,6 +65,11 @@ const LeftToolBar: React.FC = () => {
       const result = confirm('キャンバスの内容をクリアしてもよろしいですか？');
       if (result) {
         canvas.clear();
+      }
+    } else if (toolId === 'selectedClear') {
+      const result = confirm('選択したものを削除してもよろしいですか？');
+      if (result) {
+        clearSelectedObjects(canvas);
       }
     } else {
       setSelectedTool(toolId);

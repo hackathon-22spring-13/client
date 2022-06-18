@@ -4,7 +4,7 @@ import { selectedColorState } from '../recoil/atoms/colors';
 import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { selectedWeightState } from '../recoil/atoms/weight';
-import { Color, Tool, ToolOption, Tools } from '../types';
+import type { Color, Tool, ToolOption, Tools } from '../types';
 
 interface Props {
   menuItemList: ToolOption[];

@@ -1,4 +1,4 @@
-import { Color } from '../types';
+import type { Color } from '../types';
 
 export const changeColor = (canvas: fabric.Canvas | null, color: Color) => {
   if (canvas !== null) {

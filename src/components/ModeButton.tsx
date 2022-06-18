@@ -4,7 +4,7 @@ import { GrSelect } from 'react-icons/gr';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { lineState } from '../recoil/atoms/line';
-import { Mode } from '../types';
+import type { Mode } from '../types';
 
 const ModeButton: React.FC = () => {
   const modes = {

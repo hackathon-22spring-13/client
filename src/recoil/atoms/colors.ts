@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Color } from '../../types';
+import type { Color } from '../../types';
 
 export const selectedColorState = atom<Color>({
   key: 'colorState',

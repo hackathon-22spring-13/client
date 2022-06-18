@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
+import type { Tools } from '../../types';
 
-type Tools = 'color' | 'weight' | 'object' | 'line' | 'clear' | '';
 export const selectedToolState = atom<Tools>({
   key: 'selectedToolState',
   default: '',

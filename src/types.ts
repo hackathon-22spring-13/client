@@ -5,7 +5,7 @@ export interface Tool {
   items: ToolOption[];
   function: (option: string) => void;
 }
-export type Tools = 'color' | 'weight' | 'object' | 'line' | 'clear' | '';
+export type Tools = 'color' | 'weight' | 'object' | 'line' | 'clear' | 'selectedClear' | '';
 
 export type Mode = 'draw' | 'select';
 

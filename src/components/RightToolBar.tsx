@@ -8,7 +8,7 @@ import { shouldShowModalState } from '../recoil/atoms/modal';
 import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { objects } from '../tools/object';
-import { Shape, Tool, ToolOption, Tools } from '../types';
+import type { Shape, Tool, ToolOption, Tools } from '../types';
 import ConvertButton from './ConvertButton';
 import MenuModal from './MenuModal';
 import ModeButton from './ModeButton';
