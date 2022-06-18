@@ -14,11 +14,15 @@ const ConvertButton: React.FC = () => {
       const svgBlob = new Blob([canvas.toSVG()], { type: 'image/svg+xml' });
       const formData = new FormData();
       formData.append('svg_file', svgBlob);
-      const res = await axios.post('http://localhost:5000/file', formData);
-      setTikz(res.data);
-      const texBlob = new Blob([res.data], { type: 'application/x-tex' });
-      setTexUrl(URL.createObjectURL(texBlob));
-      alert('succeeded!');
+      try {
+        const res = await axios.post('http://localhost:5000/file', formData);
+        setTikz(res.data);
+        const texBlob = new Blob([res.data], { type: 'application/x-tex' });
+        setTexUrl(URL.createObjectURL(texBlob));
+        alert('succeeded!');
+      } catch (err) {
+        alert('failed!');
+      }
     }
   }
 

@@ -13,6 +13,12 @@ const Result: React.FC<Props> = ({ result }) => {
     navigator.clipboard.writeText(result);
     setIsCopied(true);
   }
+  function handleDownload(e: React.MouseEvent<HTMLButtonElement>) {
+    if (texUrl === '') {
+      alert('まずは変換してください');
+      e.preventDefault();
+    }
+  }
   useEffect(() => {
     setIsCopied(false);
   }, [result]);
@@ -27,7 +33,10 @@ const Result: React.FC<Props> = ({ result }) => {
           <MdContentCopy />
           {isCopied ? 'コピーしました！' : 'コピー'}
         </button>
-        <button className='rounded-md bg-purple-500 text-white p-2 top-2 right-20 absolute hover:bg-purple-600'>
+        <button
+          className='rounded-md bg-purple-500 text-white p-2 top-2 right-20 absolute hover:bg-purple-600'
+          onClick={(e) => handleDownload(e)}
+        >
           <a download='tikz.tex' href={texUrl}>
             ダウンロード
           </a>
