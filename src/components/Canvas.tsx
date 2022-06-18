@@ -29,21 +29,29 @@ const Canvas: React.FC = () => {
         setSelectedTool('');
       }
     }
+  }
+
+  function handleDragStart(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    console.log('drag start');
     if (selectedTool === 'line') {
       if (canvas !== null) {
         const { offsetX, offsetY } = e.nativeEvent;
-        if (line.x === -1 && line.y === -1) {
-          setLine({ x: offsetX, y: offsetY });
-        } else {
-          canvas.add(
-            new fabric.Line([line.x, line.y, offsetX, offsetY], {
-              strokeWidth: Number(selectedWeight),
-              stroke: selectedColor,
-            }),
-          );
-          setLine({ x: -1, y: -1 });
-          setSelectedTool('');
-        }
+        setLine({ x: offsetX, y: offsetY });
+      }
+    }
+  }
+  function handleDragEnd(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    console.log('drag end');
+    if (selectedTool === 'line') {
+      if (canvas !== null) {
+        const { offsetX, offsetY } = e.nativeEvent;
+        canvas.add(
+          new fabric.Line([line.x, line.y, offsetX, offsetY], {
+            strokeWidth: Number(selectedWeight),
+            stroke: selectedColor,
+          }),
+        );
+        setSelectedTool('');
       }
     }
   }
@@ -59,7 +67,11 @@ const Canvas: React.FC = () => {
   return (
     <div className='flex justify-between'>
       <LeftToolBar />
-      <div onClick={(e) => handleAddObject(e)}>
+      <div
+        onClick={(e) => handleAddObject(e)}
+        onMouseDown={(e) => handleDragStart(e)}
+        onMouseUp={(e) => handleDragEnd(e)}
+      >
         <canvas ref={canvasRef} />
       </div>
       <RightToolBar />
