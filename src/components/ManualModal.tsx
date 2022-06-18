@@ -5,7 +5,7 @@ const WorkModal: React.FC = () => {
   const setShouldShowManualModal = useSetRecoilState(shouldShowManualModalState);
   return (
     <div
-      className='h-full bg-gray-300/50 w-full top-0 left-0 z-3 fixed'
+      className='h-full bg-dark-300/50 w-full top-0 left-0 z-3 fixed'
       onClick={() => setShouldShowManualModal(false)}
     >
       <div
