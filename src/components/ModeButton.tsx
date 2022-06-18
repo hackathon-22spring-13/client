@@ -22,7 +22,6 @@ const ModeButton: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
 
   function handleChangeMode() {
-    setLine({ x: -1, y: -1 });
     if (mode === 'draw') {
       setMode('select');
       if (canvas !== null) {

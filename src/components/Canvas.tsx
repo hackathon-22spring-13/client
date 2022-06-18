@@ -32,7 +32,6 @@ const Canvas: React.FC = () => {
   }
 
   function handleDragStart(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    console.log('drag start');
     if (selectedTool === 'line') {
       if (canvas !== null) {
         const { offsetX, offsetY } = e.nativeEvent;
@@ -41,7 +40,6 @@ const Canvas: React.FC = () => {
     }
   }
   function handleDragEnd(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    console.log('drag end');
     if (selectedTool === 'line') {
       if (canvas !== null) {
         const { offsetX, offsetY } = e.nativeEvent;
