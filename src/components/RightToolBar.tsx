@@ -17,13 +17,16 @@ const RightToolBar: React.FC = () => {
   const canvas = useRecoilValue(canvasState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const setLine = useSetRecoilState(lineState);
+  const selectedShape = useRecoilValue(selectedShapeState);
   const [menuItemList, setMenuItemList] = useState<ToolOption[]>();
   const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
   const setSelectedShapeState = useSetRecoilState(selectedShapeState);
   const tools: Tool[] = [
     //todo:アサーションを消して型チェックする
     {
-      name: '図形',
+      name: `図形${
+        selectedShape ? ' : ' + objects.find((object) => object.value === selectedShape)?.name : ''
+      }`,
       id: 'object',
       icon: <IoShapes size={40} />,
       items: objects,
