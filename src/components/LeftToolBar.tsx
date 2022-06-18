@@ -38,18 +38,18 @@ const LeftToolBar: React.FC = () => {
       function: (option: string) => changeWeight(canvas, option),
     },
     {
-      name: 'クリア',
-      id: 'clear',
-      icon: <IoTrash size={40} />,
-      items: [],
-      function: () => console.log('clear'),
-    },
-    {
       name: '選択したものの削除',
       id: 'selectedClear',
       icon: <BsEraser size={40} />,
       items: [],
       function: () => console.log('selectedClear'),
+    },
+    {
+      name: 'クリア',
+      id: 'clear',
+      icon: <IoTrash size={40} />,
+      items: [],
+      function: () => console.log('clear'),
     },
   ];
   function handleSelectTool(
