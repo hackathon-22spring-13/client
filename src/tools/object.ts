@@ -11,8 +11,8 @@ export const changeObject = (
   if (canvas !== null) {
     if (object === 'rect') {
       const shape = new fabric.Rect({
-        left: offsetX,
-        top: offsetY,
+        left: offsetX - 50,
+        top: offsetY - 50,
         width: 100,
         height: 100,
         fill: 'transparent',
@@ -44,7 +44,7 @@ export const changeObject = (
     } else if (object === 'triangle') {
       const shape = new fabric.Triangle({
         left: offsetX - 50,
-        top: offsetY,
+        top: offsetY - 50,
         width: 100,
         height: 100,
         fill: 'transparent',
