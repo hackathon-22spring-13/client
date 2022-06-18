@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Canvas from '../components/Canvas';
 import ManualModal from '../components/ManualModal';
@@ -29,14 +29,14 @@ const Home: NextPage = () => {
       setSelectedTool('');
     }
   }
-  const handleDeleteObjects = ((e:KeyboardEvent)=>{
-    if (canvas!==null && e.key==='Delete'){
+  const handleDeleteObjects = (e: KeyboardEvent) => {
+    if (canvas !== null && e.key === 'Delete') {
       clearSelectedObjects(canvas);
     }
-  });
+  };
   useEffect(() => {
-    document.addEventListener("keydown", handleDeleteObjects, false);
-  },[canvas]); // eslint-disable-line react-hooks/exhaustive-deps
+    document.addEventListener('keydown', handleDeleteObjects, false);
+  }, [canvas]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div onClick={handleCloseModal}>
       <section className='mx-auto w-320 relative'>
