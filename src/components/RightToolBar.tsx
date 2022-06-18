@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { GiPencilRuler } from 'react-icons/gi';
 import { IoShapes } from 'react-icons/io5';
+import { RiCharacterRecognitionFill } from 'react-icons/ri';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { lineState } from '../recoil/atoms/line';
@@ -35,6 +36,13 @@ const RightToolBar: React.FC = () => {
       icon: <GiPencilRuler size={40} />,
       items: [],
       function: () => console.log('change line'),
+    },
+    {
+      name: '文字',
+      id: 'character',
+      icon: <RiCharacterRecognitionFill size={40} />,
+      items: [],
+      function: () => console.log('add character'),
     },
   ];
   function handleSelectTool(
