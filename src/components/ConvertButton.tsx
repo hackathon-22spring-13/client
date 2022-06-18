@@ -15,7 +15,10 @@ const ConvertButton: React.FC = () => {
       const formData = new FormData();
       formData.append('svg_file', svgBlob);
       try {
-        const res = await axios.post('http://localhost:5000/file', formData);
+        const res = await axios.post(
+          'https://hackaton_22spring_13.trap.show/server/file',
+          formData,
+        );
         setTikz(res.data);
         const texBlob = new Blob([res.data], { type: 'application/x-tex' });
         setTexUrl(URL.createObjectURL(texBlob));

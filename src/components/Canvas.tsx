@@ -8,6 +8,7 @@ import { selectedShapeState } from '../recoil/atoms/object';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { selectedWeightState } from '../recoil/atoms/weight';
 import { changeObject } from '../tools/object';
+import { addTextbox } from '../tools/textbox';
 import LeftToolBar from './LeftToolBar';
 import RightToolBar from './RightToolBar';
 
@@ -51,6 +52,12 @@ const Canvas: React.FC = () => {
         );
         setSelectedTool('');
       }
+    }
+
+    if (selectedTool === 'textbox') {
+      const { offsetX, offsetY } = e.nativeEvent;
+      addTextbox(canvas, offsetX, offsetY);
+      setSelectedTool('');
     }
   }
 

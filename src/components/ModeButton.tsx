@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
-import { GrSelect } from 'react-icons/gr';
+import { HiCursorClick } from 'react-icons/hi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
 import { lineState } from '../recoil/atoms/line';
@@ -14,7 +14,7 @@ const ModeButton: React.FC = () => {
     },
     select: {
       name: '選択モード',
-      icon: <GrSelect size={40} />,
+      icon: <HiCursorClick size={40} />,
     },
   };
   const [mode, setMode] = useState<Mode>('draw');
