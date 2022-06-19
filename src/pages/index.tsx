@@ -33,7 +33,7 @@ const Home: NextPage = () => {
     }
   };
   useEffect(() => {
-    document.addEventListener('keydown', handleKeydown, false);
+    document.addEventListener('keydown', handleKeydown);
   }, [canvas]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { GiPaintBrush } from 'react-icons/gi';
 import { HiCursorClick } from 'react-icons/hi';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { canvasState } from '../recoil/atoms/canvas';
+import { selectedToolState } from '../recoil/atoms/tools';
 import type { Mode } from '../types';
 
 const ModeButton: React.FC = () => {
@@ -18,17 +19,19 @@ const ModeButton: React.FC = () => {
   };
   const [mode, setMode] = useState<Mode>('draw');
   const canvas = useRecoilValue(canvasState);
+  const setSelectedTool = useSetRecoilState(selectedToolState);
 
   function handleChangeMode() {
     if (mode === 'draw') {
-      setMode('select');
       if (canvas !== null) {
+        setMode('select');
         canvas.isDrawingMode = false;
       }
     } else {
-      setMode('draw');
       if (canvas !== null) {
+        setMode('draw');
         canvas.isDrawingMode = true;
+        setSelectedTool('');
       }
     }
   }
