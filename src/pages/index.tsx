@@ -6,7 +6,6 @@ import Header from '../components/Header';
 import ManualModal from '../components/ManualModal';
 import Result from '../components/Result';
 import { canvasState } from '../recoil/atoms/canvas';
-import { lineState } from '../recoil/atoms/line';
 import { shouldShowManualModalState, shouldShowMenuModalState } from '../recoil/atoms/modal';
 import { selectedToolState } from '../recoil/atoms/tools';
 import { clearSelectedObjects } from '../tools/clear';
@@ -15,11 +14,10 @@ const Home: NextPage = () => {
   const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
   const shouldShowManualModal = useRecoilValue(shouldShowManualModalState);
-  const line = useRecoilValue(lineState);
   const canvas = useRecoilValue(canvasState);
   function handleCloseModal() {
     if (shouldShowMenuModal) {
-      if (selectedTool === 'line' && line.x === -1 && line.y === -1) {
+      if (selectedTool === 'line') {
         return;
       }
       setShouldShowMenuModal(false);

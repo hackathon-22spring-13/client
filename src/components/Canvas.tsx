@@ -58,7 +58,6 @@ const Canvas: React.FC = () => {
             stroke: selectedColor,
           }),
         );
-        setSelectedTool('');
       }
     }
   }
