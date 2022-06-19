@@ -24,13 +24,16 @@ const Home: NextPage = () => {
       setSelectedTool('');
     }
   }
-  const handleDeleteObjects = (e: KeyboardEvent) => {
+  const handleKeydown = (e: KeyboardEvent) => {
     if (canvas !== null && e.key === 'Delete') {
       clearSelectedObjects(canvas);
     }
+    if (e.key === 'Escape') {
+      setSelectedTool('');
+    }
   };
   useEffect(() => {
-    document.addEventListener('keydown', handleDeleteObjects, false);
+    document.addEventListener('keydown', handleKeydown, false);
   }, [canvas]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
