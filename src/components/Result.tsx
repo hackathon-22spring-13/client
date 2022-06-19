@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { AiOutlineDownload } from 'react-icons/ai';
 import { MdContentCopy } from 'react-icons/md';
 import { useRecoilValue } from 'recoil';
 import { texUrlState } from '../recoil/atoms/texUrl';
@@ -38,7 +39,8 @@ const Result: React.FC = () => {
           className='rounded-md bg-purple-500 text-white p-2 top-15 right-2 absolute hover:bg-purple-600'
           onClick={(e) => handleDownload(e)}
         >
-          <a download='tikz.tex' href={texUrl}>
+          <a className='flex items-center' download='tikz.tex' href={texUrl}>
+            <AiOutlineDownload />
             ダウンロード
           </a>
         </button>
