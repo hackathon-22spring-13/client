@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Canvas from '../components/Canvas';
+import Header from '../components/Header';
 import ManualModal from '../components/ManualModal';
 import Result from '../components/Result';
 import { canvasState } from '../recoil/atoms/canvas';
@@ -13,9 +14,7 @@ import { clearSelectedObjects } from '../tools/clear';
 const Home: NextPage = () => {
   const [shouldShowMenuModal, setShouldShowMenuModal] = useRecoilState(shouldShowMenuModalState);
   const [selectedTool, setSelectedTool] = useRecoilState(selectedToolState);
-  const [shouldShowManualModal, setShouldShowManualModal] = useRecoilState(
-    shouldShowManualModalState,
-  );
+  const shouldShowManualModal = useRecoilValue(shouldShowManualModalState);
   const line = useRecoilValue(lineState);
   const canvas = useRecoilValue(canvasState);
   function handleCloseModal() {
@@ -39,13 +38,7 @@ const Home: NextPage = () => {
   return (
     <div onClick={handleCloseModal}>
       <section className='mx-auto w-320 relative'>
-        <h1 className='my-8 text-center text-3xl'>I Love TikZ</h1>
-        <button
-          className='rounded-lg bg-purple-500 text-white p-2 top-0 left-0 absolute hover:bg-purple-600'
-          onClick={() => setShouldShowManualModal(true)}
-        >
-          説明書を表示
-        </button>
+        <Header />
         <div className='border rounded-lg h-160 shadow-lg w-320'>
           <Canvas />
         </div>
